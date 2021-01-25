@@ -1,0 +1,23 @@
+
+<!-- 
+    a. Simple bindings such as avatarSrc, thread.name, and thread.lastMessage
+    b. using *ngIf to only show &bull if this is the selected thread.
+    c. Binding the click event to our clicked function. 
+            - we pass $event as an argument, this is a special variable provided by Angular that describes the event. We use this in the clicked handler by calling event.preventDefault(), this makes sure that we dont navigate to a different page.
+-->
+
+<div class="media conversation">
+    <div class="pull-left">
+        <img class="media-object avatar" src="{{thread.avatarSrc}}" alt="Avatar">
+    </div>
+    <div class="media-body">
+        <h5 class="media-heading contact-name"> 
+            {{thread.name}}
+            <span *ngIf="selected">&bull;</span>
+        </h5>
+        <small class="message-preview">
+            {{thread.lastMessage.text}}
+        </small>
+    </div>
+    <a (click)="clicked($event)" class="div-link">Select</a>
+</div>

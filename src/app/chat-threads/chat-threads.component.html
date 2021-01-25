@@ -1,0 +1,17 @@
+<!-- 
+    a. chat-thread renders the ChatThread component.
+    b. NgFor iterates over the threads and passes the input [thread] to our ChatThread comp directive.
+        - async lets us use an RxJS Observable here in the view. It lets use use our async observable as if it was a sync collection.
+        - We specify a custom changeDection on this comp. Angular has a flexible and efficient chagne detection system. One of the benefits is that if we have a comp what has immutable or observable bindings, then we are ablet o give the chagne detection ststem hints taht will make our application run efficiently.
+        - IN OTHER WORDS: Angular will subscribe for chagnes to the threads observable and trigger an update when a new event is emitted.
+-->
+
+<!-- conversations -->
+<div class="row">
+    <div class="conversation-wrap">
+
+        <chat-thread *ngFor="let thread of threads | async" [thread]="thread">
+        </chat-thread>
+
+    </div>
+</div>
