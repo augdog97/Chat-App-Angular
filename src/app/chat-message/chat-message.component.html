@@ -1,0 +1,23 @@
+
+<!-- 
+    a. The FromNowPipe is a pipe that casts our Message sent-at time to a human readable "x seconds ago" message. The pipe usses the moment.js library.
+    b. With ngClass we are telling Angular to apply the msg-receive if incomine is true and apply msg-sent if incoming is false. This allows us to display incoming and outgoing messages differently. 
+-->
+
+
+
+<div class="msg-container" [ngClass]="{'base-sent': !incoming, 'base-receive': incoming}">
+
+    <div class="avatar" *ngIf="!incoming">
+        <img src="{{message.author.avatarSrc}}">
+    </div>
+
+    <div class="messages" [ngClass]="{'msg-sent': !incoming, 'msg-receive': incoming}">
+        <p>{{message.text}}</p>
+        <p class="time">{{message.author}} • {{message.sentAt | fromNow}}</p>
+    </div>
+
+    <div class="avatar" *ngIf="incoming">
+        <img src="{{message.author.avatarSrc}}">
+    </div>
+</div>

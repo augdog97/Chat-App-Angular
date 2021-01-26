@@ -1,0 +1,46 @@
+
+
+
+<!-- 
+    a.  In chat-message we use ngFor along with the async pipe to iterate over our list of messages.
+    b. In the input box we are using keydown.enter and ngModel.
+            - For the keydown event we are binding an event to an element. This says if enter is pressed, call the function in the expression, which in this case is onEnter($event).
+            - With ngModel we are using two binding between the value of the input tax and the draftMessage.text. This means that if we type into the input tag, draftMessage.text will auotmatically be set to the value of that input. Likwise if we were to update draftMessage in our code, the value in the input tag would change in the view.
+    c. With the 'Send' button we are binding the (click) property to the onEnter function in the component.
+-->
+
+<div class="chat-window-container">
+    <div class="chat-window">
+        <div class="panel-container">
+            <div class="panel panel-default">
+
+                <div class="panel-heading top-bar">
+                    <div class="panel-title-container">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-comment"></span>
+                            Chat - {{currentThread.name}}
+                        </h3>
+                    </div>
+                    <div class="panel-buttons-container">
+                        <!-- you could put minimize or close buttons here -->
+                    </div>
+                </div>
+
+                <div class="panel-body msg-container-base">
+                    <chat-message *ngFor="let message of messages | async" [message]="message">
+                    </chat-message>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input type="text" class="chat-input" placeholder="Write your message here..."
+                            (keydown.enter)="onEnter($event)" [(ngModel)]="draftMessage.text" />
+                        <span class="input-group-btn">
+                            <button class="btn-chat" (click)="onEnter($event)">Send</button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
